@@ -2,7 +2,9 @@ import { Router } from "express";
 
 const router = Router();
 //product routes
-router.get("/product", () => {});
+router.get("/product", (req, res) => {
+  res.json({ message: req.shhhh_secret });
+});
 router.get("/product/:id", () => {});
 router.put("/product/:id", () => {});
 router.post("/product", () => {});
@@ -21,3 +23,4 @@ router.get("/updatepoints/:id", () => {});
 router.put("/updatepoints/:id", () => {});
 router.post("/updatepoints", () => {});
 router.delete("/updatepoints/:id", () => {});
+export default router;
