@@ -2,6 +2,7 @@ import express from "express";
 import router from "./routes";
 import morgan from "morgan";
 import { protect } from "./modules/auth";
+import { createNewUser, signin } from "./handlers/user";
 const app = express();
 const customLogger = (message) => (res, req, next) => {
   console.log("hello forn ${message}");
@@ -22,5 +23,7 @@ app.get("/", (req, res, next) => {
   res.json({ message: "hello" });
 });
 
-app.use("/api", protect, router);
+app.use("/api", protect, router); // by adding 'protect' we use auth in the routes
+app.post("/user", createNewUser);
+app.post("/signin", signin);
 export default app;
