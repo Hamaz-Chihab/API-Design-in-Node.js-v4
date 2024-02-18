@@ -1,7 +1,8 @@
 import { resolve } from "path";
+
 import prisma from "../db";
 //get all :
-export const getProducts = async (req, res) => {
+export const getAllProducts = async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
       id: req.user.id,
@@ -14,13 +15,12 @@ export const getProducts = async (req, res) => {
 };
 
 export const getOneProduct = async (req, res) => {
-  const id = res.params.id;
-
+  // const id = res.params.id;
   const product = await prisma.product.findFirst({
     where: {
       //the combinition we need to find
       id: req.params.id,
-      belongsToId: res.user.id,
+      belongsToId: req.user.id,
     },
   });
   res.json({ data: product });
@@ -56,5 +56,5 @@ export const deleteProduct = async (req, res) => {
       belongsToId: req.user.id,
     },
   });
-  res.json({ data: deleted });
+  res.json({ data: deleted }, { message: "Product deleted succefully" });
 };

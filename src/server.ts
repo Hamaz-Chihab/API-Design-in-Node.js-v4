@@ -24,6 +24,6 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/api", protect, router); // by adding 'protect' we use auth in the routes
-app.post("/user", createNewUser);
+app.post("/signup", createNewUser);
 app.post("/signin", signin);
 export default app;

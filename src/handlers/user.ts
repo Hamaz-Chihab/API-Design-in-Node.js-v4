@@ -11,7 +11,7 @@ export const createNewUser = async (req, res, next) => {
       },
     });
     const token = createJWT(user);
-    res.json({ token: token });
+    res.json({ token: token, message: "a user has created succesfully" });
   } catch (error) {
     // Handle the error appropriately
     res.status(500).json({ error: error.message });
@@ -29,7 +29,9 @@ export const signin = async (req, res, next) => {
   const isValid = await comparePasswords(req.body.password, user.password);
   if (!isValid) {
     res.status(401);
-    res.json({ massage: "nope" });
+    res.json({
+      massage: "nope you are not authorized please put Token in headers",
+    });
     return;
   }
   const token = createJWT(user);
