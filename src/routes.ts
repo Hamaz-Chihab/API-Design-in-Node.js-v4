@@ -59,6 +59,8 @@ router.put(
   "/updatepoints/:id",
   body("name").optional().isString(),
   body("description").optional().isString(),
+  body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
+  body("version").optional(),
   () => {}
 );
 router.post(
