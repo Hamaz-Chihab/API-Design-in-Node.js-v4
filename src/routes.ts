@@ -24,7 +24,11 @@ router.post(
   "/update",
   body("title").optional(),
   body("body").optional(),
-  oneOf("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]),
+  oneOf([
+    body("status").equals("IN_PROGRESS"),
+    body("status").equals("SHIPPED"),
+    body("status").equals("DEPRECATED"),
+  ]),
   body("version").optional(),
   () => {}
 );
