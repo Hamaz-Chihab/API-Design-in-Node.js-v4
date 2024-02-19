@@ -8,7 +8,13 @@ import {
   getOneProduct,
   updateProduct,
 } from "./handlers/product";
-import { createUpdate } from "./handlers/update";
+import {
+  createUpdate,
+  deleteUpdate,
+  getOneUpdate,
+  getUpdates,
+  updateUpdate,
+} from "./handlers/update";
 
 const router = Router();
 
@@ -26,8 +32,8 @@ router.delete("/product/:id", deleteProduct);
 
 //update routes
 
-router.get("/update", () => {});
-router.get("/update/:id", () => {});
+router.get("/update", getUpdates);
+router.get("/update/:id", getOneUpdate);
 router.post(
   "/update",
   body("title").exists().isString(),
@@ -47,10 +53,10 @@ router.put(
   body("title").exists().isString(),
   body("body").exists().isString(),
   // body("version").optional(),//because it is opstional () => {});
-  () => {}
+  updateUpdate
 );
 
-router.delete("/update/:id", () => {});
+router.delete("/update/:id", deleteUpdate);
 
 //updatePoints routes
 router.get("/updatepoints   ", () => {});
