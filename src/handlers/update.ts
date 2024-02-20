@@ -26,14 +26,19 @@ export const getUpdates = async (req, res) => {
 };
 
 export const createUpdate = async (req, res) => {
+  const { productId, ...rest } = req.body;
   const product = await prisma.product.findUnique({
-    where: { id: req.body.id },
+    where: { id: productId },
   });
   if (!product) {
     return res.json({ message: "product not exist to be updated" });
   }
   const update = await prisma.update.create({
-    data: req.body,
+    data: {
+      title: req.body.title,
+      body: req.body.body,
+      product: { connect: { id: product.id } },
+    },
   });
   res.json({ data: update });
 };
@@ -79,9 +84,9 @@ export const deleteUpdate = async (req, res) => {
     return res.json({ message: "match == false " });
   }
   const deleted = await prisma.update.delete({
-    where : {
-      id : req.params.id
-    }
-  })
-  res.json({data : deleted })
+    where: {
+      id: req.params.id,
+    },
+  });
+  res.json({ data: deleted });
 };

@@ -37,7 +37,7 @@ enum UPDATE_STATUSES {
 model Update {
   id       String          @id @default(uuid())
   createAt DateTime        @default(now())
-  updateAt DateTime
+  updateAt DateTime         @updatedAt
   title    String
   body     String
   status   UPDATE_STATUSES @default(IN_PROGRESS)
@@ -52,7 +52,7 @@ model Update {
 model UpdatePoint {
   id       String   @id @default(uuid())
   createAt DateTime @default(now())
-  updateAt DateTime
+  updateAt DateTime 
 
   name        String @db.VarChar(255)
   description String
