@@ -13,8 +13,9 @@ export const createNewUser = async (req, res, next) => {
     const token = createJWT(user);
     res.json({ token: token, message: "a user has created succesfully" });
   } catch (error) {
-    // Handle the error appropriately
-    res.status(500).json({ error: error.message });
+    error.type = "input";
+    next(error);
+    // res.status(500).json({ error: error.message });
   }
 };
 
