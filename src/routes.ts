@@ -83,8 +83,10 @@ router.use((err, req, res, next) => {
   console.log(err);
   res.json({ message: "in router handler" });
 });
+//the error handler should be for the next 
 router.use((err, req, res, next) => {
   console.log(err);
   res.json({ message: "in router handler" });
 });
 export default router;
+
