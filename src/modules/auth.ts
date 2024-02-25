@@ -17,6 +17,7 @@ export const createJWT = (user) => {
   );
   return token;
 };
+
 export const protect = (req, res, next) => {
   const bearer = req.headers.authorization;
   if (!bearer) {
@@ -30,6 +31,7 @@ export const protect = (req, res, next) => {
     res.json({ message: "not valide token" });
     return;
   }
+  
   try {
     const user = jwt.verify(token, process.env.JWT_SECRET);
     req.user = user;
