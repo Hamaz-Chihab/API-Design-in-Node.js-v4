@@ -20,7 +20,6 @@ app.use((req, res, next) => {
 });
 app.use(customLogger("chihab"));
 app.get("/", (req, res, next) => {
-  console.log("hello from express");
   res.status(200);
   res.json({ message: "hello" });
 });
