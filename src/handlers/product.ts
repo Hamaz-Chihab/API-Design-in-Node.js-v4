@@ -1,6 +1,7 @@
 import { resolve } from "path";
 
 import prisma from "../db";
+import { log } from "console";
 //get all :
 export const getAllProducts = async (req, res) => {
   const user = await prisma.user.findUnique({

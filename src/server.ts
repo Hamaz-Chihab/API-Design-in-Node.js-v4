@@ -22,6 +22,7 @@ app.use(customLogger("chihab"));
 app.get("/", (req, res, next) => {
   res.status(200);
   res.json({ message: "hello" });
+  res.json({ message2: "this is an auther test " });
 });
 
 const signupValidationRules = [
@@ -31,7 +32,7 @@ const signupValidationRules = [
     .withMessage("Password must be at least  8 characters long"),
 ];
 
-app.use("/api", protect, router); // by adding 'protect' we use auth in the routes
+app.use("/api", router); // by adding 'protect' we use auth in the routes
 app.post(
   "/signup",
   signupValidationRules,
