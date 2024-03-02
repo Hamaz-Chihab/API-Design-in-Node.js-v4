@@ -32,7 +32,7 @@ const signupValidationRules = [
     .withMessage("Password must be at least  8 characters long"),
 ];
 
-app.use("/api", router); // by adding 'protect' we use auth in the routes
+app.use("/api", protect, router); // by adding 'protect' we use auth in the routes
 app.post(
   "/signup",
   signupValidationRules,

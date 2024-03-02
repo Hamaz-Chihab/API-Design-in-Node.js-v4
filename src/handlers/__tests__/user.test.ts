@@ -12,4 +12,29 @@ describe("user handler", () => {
     };
     await user.createNewUser(req, res, () => {});
   });
+
+  it("should signin a valid user", async () => {
+    const req = {
+      body: {
+        userName: "helloworld@gmail.com",
+        // password: "helloworld",
+      },
+    };
+    const res = {
+      json({ token }) {
+        expect(token).toBeTruthy();
+      },
+    };
+
+    await user.signin(req, res, () => {});
+  });
+
+  // it("should return 401 for invalid credentials", async () => {
+  //   const req = { body: { username: "unknown", password: "wrong_password" } };
+  //   const res = { json: jest.fn(), status: jest.fn() };
+
+  //   await user.signin(req, res, () => {});
+
+  //   expect(res.status).toHaveBeenCalledWith(401); // Unauthorized status
+  // });
 });

@@ -16,10 +16,10 @@ if (stage === "production") {
 export default merge({
   stage,
   env: process.env.NODE_ENV,
-  port: 3001,
-  
+  port: 3000,
+
   secrets: {
     jwt: process.env.JWT_SECRET,
     dbUrl: process.env.DATABASE_URL,
   },
-});  
+});

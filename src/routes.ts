@@ -18,7 +18,7 @@ import {
 
 const router = Router();
 
-//product routes
+//product routes :
 router.get("/product", getAllProducts);
 router.post(
   "/product",
@@ -27,7 +27,10 @@ router.post(
   createProduct
 );
 router.get("/product/:id", getOneProduct);
-router.put("/product/:id", body("name").isString(), updateProduct);
+router.put("/product/:id",
+  body("name").isString(), // Existing validation
+  updateProduct
+);
 router.delete("/product/:id", deleteProduct);
 
 //update routes
@@ -35,7 +38,7 @@ router.delete("/product/:id", deleteProduct);
 router.get("/update", getUpdates);
 router.get("/update/:id", getOneUpdate);
 router.post(
-  "/update",
+  "/update",  
   body("title").exists().isString(),
   body("body").exists().isString(),
   body("productId").exists().isString(),
@@ -52,6 +55,8 @@ router.put(
   "/update/:id",
   body("title").exists().isString(),
   body("body").exists().isString(),
+  body("status").isIn(['IN_PROGRESS', 'SHIPPED', 'DEPRECATED']), // New validation
+
   // body("version").optional(),//because it is opstional () => {});
   updateUpdate
 );

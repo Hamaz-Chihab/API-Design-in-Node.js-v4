@@ -51,20 +51,28 @@ export const updateUpdate = async (req, res) => {
     include: {
       updates: true,
     },
-  });
+  }); //products is an array of updates
+  console.log("this is the poducts array :", products);
   const updates = products.reduce((allUpdates, product) => {
     return [...allUpdates, ...product.updates];
   }, []); //setup la form de response updates
+  console.log("this is the updates array :", updates);
   const match = updates.find((update) => update.id === req.params.id);
+  console.log("the match updates with the id :", match);
   if (!match) {
-    return res.json({ message: "match == false " });
+    return res.json({ message: "match == false not match updates" });
   }
-  const updateUpdate = await prisma.update.update({
+  const updateUpdateobj = await prisma.update.update({
     where: {
       id: req.params.id,
     },
-    data: req.body,
+    data: {
+      title: req.body.title,
+      body: req.body.body,
+      status: req.body.status,
+    },
   });
+  res.json({ data: updateUpdateobj });
 };
 
 export const deleteUpdate = async (req, res) => {

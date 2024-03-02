@@ -40,7 +40,7 @@ model Update {
   updateAt DateTime         @updatedAt
   title    String
   body     String
-  status   UPDATE_STATUSES @default(IN_PROGRESS)
+  status   UPDATE_STATUSES @default(IN_PROGRESS)  //# Changed to an enum
   version  String?
   asset    String? //not nececcery to felle
 
