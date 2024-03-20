@@ -10,3 +10,13 @@ export const handleInputErrors = (req, res, next) => {
     next();
   }
 };
+export const validateIdParam = async (req, res, next, params) => {
+  const { id } = params;
+
+  // Validation logic
+  if (isNaN(parseInt(id))) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+
+  next(); // Continue processing the request if valid
+};

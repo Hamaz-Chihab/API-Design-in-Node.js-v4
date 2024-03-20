@@ -17,81 +17,73 @@ import {
 } from "./handlers/update";
 
 const router = Router();
-
+//error handler Middleware for the router file :
+router.use((err, req, res, next) => {
+  console.log(err);
+  res.json({ message: "in router handler" });
+});
+//the error handler should be for the next
 //product routes :
-router.get("/product", getAllProducts);
-router.post(
-  "/product",
-  body("name").isString(),
-  handleInputErrors,
-  createProduct
-);
-router.get("/product/:id", getOneProduct);
-router.put("/product/:id",
-  body("name").isString(), // Existing validation
-  updateProduct
-);
-router.delete("/product/:id", deleteProduct);
+router
+  .get("/product", getAllProducts)
+  .post("/product", body("name").isString(), handleInputErrors, createProduct)
+  .get("/product/:id", getOneProduct)
+  .put(
+    "/product/:id",
+    body("name").isString(), // Existing validation
+    updateProduct
+  )
+  .delete("/product/:id", deleteProduct);
 
 //update routes
 
-router.get("/update", getUpdates);
-router.get("/update/:id", getOneUpdate);
-router.post(
-  "/update",  
-  body("title").exists().isString(),
-  body("body").exists().isString(),
-  body("productId").exists().isString(),
-  createUpdate
-  // oneOf([
-  //   body("status").equals("IN_PROGRESS"),
-  //   body("status").equals("SHIPPED"),
-  //   body("status").equals("DEPRECATED"),
-  // ]),
-  // body("version").optional(),
-  // () => {}
-);
-router.put(
-  "/update/:id",
-  body("title").exists().isString(),
-  body("body").exists().isString(),
-  body("status").isIn(['IN_PROGRESS', 'SHIPPED', 'DEPRECATED']), // New validation
+router
+  .get("/update", getUpdates)
+  .get("/update/:id", getOneUpdate)
+  .post(
+    "/update",
+    body("title").exists().isString(),
+    body("body").exists().isString(),
+    body("productId").exists().isString(),
+    createUpdate
+    // oneOf([
+    //   body("status").equals("IN_PROGRESS"),
+    //   body("status").equals("SHIPPED"),
+    //   body("status").equals("DEPRECATED"),
+    // ]),
+    // body("version").optional(),
+    // () => {}
+  )
+  .put(
+    "/update/:id",
+    body("title").exists().isString(),
+    body("body").exists().isString(),
+    body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]), // New validation
 
-  // body("version").optional(),//because it is opstional () => {});
-  updateUpdate
-);
-
-router.delete("/update/:id", deleteUpdate);
+    // body("version").optional(),//because it is opstional () => {});
+    updateUpdate
+  )
+  .delete("/update/:id", deleteUpdate);
 
 //updatePoints routes
-router.get("/updatepoints   ", () => {});
-router.get("/updatepoints/:id", () => {});
-router.put(
-  "/updatepoints/:id",
-  body("name").optional().isString(),
-  body("description").optional().isString(),
-  body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
-  body("version").optional(),
-  () => {}
-);
-router.post(
-  "/updatepoints",
-  body("name").optional().isString(),
-  body("description").optional().isString(),
-  body("updateId").exists().isString(),
-  () => {}
-);
-router.delete("/updatepoints/:id", () => {});
+router
+  .get("/updatepoints   ", () => {})
+  .get("/updatepoints/:id", () => {})
+  .put(
+    "/updatepoints/:id",
+    body("name").optional().isString(),
+    body("description").optional().isString(),
+    body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
+    body("version").optional(),
+    () => {}
+  )
+  .post(
+    "/updatepoints",
+    body("name").optional().isString(),
+    body("description").optional().isString(),
+    body("updateId").exists().isString(),
+    () => {}
+  )
+  .delete("/updatepoints/:id", () => {});
 
-//error handler for the router file :
-router.use((err, req, res, next) => {
-  console.log(err);
-  res.json({ message: "in router handler" });
-});
-//the error handler should be for the next 
-router.use((err, req, res, next) => {
-  console.log(err);
-  res.json({ message: "in router handler" });
-});
 export default router;
-

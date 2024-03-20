@@ -2,7 +2,7 @@
   "name": "api-design-in-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "jest",
     "dev": "ts-node src/index.ts",
